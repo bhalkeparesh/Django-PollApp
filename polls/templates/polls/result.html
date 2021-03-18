@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pollbar app</title>
+	<!-- goodgle fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pacifico&display=swap" rel="stylesheet"> 
+	<!-- materialize icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- custom css -->
+    <style>
+    body{
+	background-color:#EAF0F1;
+	}
+
+	.brand-logo{
+		font-family: 'Pacifico', cursive;
+		margin-left: 20px;	
+	}
+    </style>
+    <link rel="stylesheet" href="polls/css/style.css">
+</head>
+<body>
+<section class="fnavbar">
+	<nav class="nav-fixed">
+    	<div class="nav-wrapper">
+      		<a href="#" class="brand-logo">Let's Take Polls</a>
+      		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    	</div>
+    </nav>
+</section>
+<section class="mainpy">
+	<p class="center-align blue-text red lighten-5">Thank You! Your vote is noticed!</p>
+	<h3 class="center-align blue-text text-darken-2">{{ question.question_text}}</h3>
+	<div class="center-align card-panel hoverable">
+		<ul>
+			{% for choice in question.choice_set.all %}
+				<li class="blue-text text-darken-2">{{ choice.choice_text }}   <span class="purple-text text-darken-3">{{ choice.percent }}%</span></li>
+			{% endfor %}
+		</ul>
+
+		<a class="center-align waves-effect waves-light btn" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+	</div>
+</section>
+</body>
+</html>

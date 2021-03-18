@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pollbar app</title>
+	<!-- goodgle fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pacifico&display=swap" rel="stylesheet"> 
+	<!-- materialize icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- custom css -->
+    <style>
+    body{
+	background-color:#EAF0F1;
+	}
+
+	.brand-logo{
+		font-family: 'Pacifico', cursive;
+		margin-left: 20px;	
+	}
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body background-color:#EAF0F1 >
+<section class="fnavbar">
+	<nav class="nav-fixed">
+    	<div class="nav-wrapper">
+      		<a href="#" class="brand-logo">Let's Take Polls</a>
+      		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    	</div>
+    </nav>
+
+</section>
+<h2 class="center-align">Most Recent Polls</h2>
+{% if latest_questions_list %}
+<div>
+	<ul>
+		{% for question in latest_questions_list %}
+		<li class="center-align">
+			<a href="{% url 'polls:detail' question.id %} ">{{ question.question_text.title }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% else %}
+	<p>OOPS!!NO Queestions Available!!</p>
+{% endif %}
+
+</body>
+</html>

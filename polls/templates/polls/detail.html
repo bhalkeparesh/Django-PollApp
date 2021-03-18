@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pollbar app</title>
+	<!-- goodgle fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Pacifico&display=swap" rel="stylesheet"> 
+	<!-- materialize icon -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- custom css -->
+    <style>
+    body{
+	background-color:#EAF0F1;
+	}
+
+	.brand-logo{
+		font-family: 'Pacifico', cursive;
+		margin-left: 20px;	
+	}
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<section class="fnavbar">
+	<nav class="nav-fixed">
+    	<div class="nav-wrapper">
+      		<a href="#" class="brand-logo">Let's Take Polls</a>
+      		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    	</div>
+    </nav>
+</section>
+
+<section class="mainpy">
+	<!-- <div class="card-panel hoverable"> -->
+	<h3 class="center-align"> {{ question.question_text.title }} </h3>
+
+	{% if error_message %}
+		<p class="center-align red lighten-5"><strong>{{error_message}}</strong></p>
+	{% endif %}
+		<form style="padding-left: 40%;" action="{% url 'polls:vote' question.id %}" method="POST">
+			{% csrf_token %}
+			{% for choice in question.choice_set.all %}
+				<p>
+			      <label for="choice{{ forloop.counter }}">
+			        <input class="with-gap" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+			        <span class="blue-text text-darken-2">{{ choice.choice_text }}</span>
+			      </label>
+			    </p>
+				<!-- <input class="with-gap" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+				<label for="choice{{ forloop.counter }}">{{ choice.choice_text}}</label>
+				<br> -->
+			{% endfor %}
+		<input class="waves-effect waves-light btn" type="submit" name="vote">
+		</form>
+	<!-- </div> -->
+</section>
+</body>
+</html>
